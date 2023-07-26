@@ -6,7 +6,6 @@ class ContactsController < ApplicationController
       render json: { message: 'E-mail envoyé avec succès !' }
     else
       render json: { error: "Erreur lors de l'envoi de l'e-mail." + @contact.errors.full_messages }, status: :unprocessable_entity
-end
     end
   end
 
