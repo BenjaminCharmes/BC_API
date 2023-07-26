@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: Benjamin_CHARMES_API_production
-  username: Benjamin_CHARMES_API
-  password: <%= ENV["BENJAMIN_CHARMES_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
