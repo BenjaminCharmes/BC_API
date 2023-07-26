@@ -1,6 +1,6 @@
 class ContactMailer < ApplicationMailer
   def send_email(contact)
     @contact = contact
-    mail(to: 'benjamin.charmes@gmail.com', subject: @contact.subject)
+    mail(to: @contact.email, subject: @contact.subject)
   end
 end
