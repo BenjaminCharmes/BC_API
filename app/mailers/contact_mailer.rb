@@ -2,9 +2,6 @@ class ContactMailer < ApplicationMailer
   def send_email(contact)
     @contact = contact
 
-    require 'sendgrid-ruby'
-    include SendGrid
-
     from = Email.new(email: 'benjamin.charmes+portfolio@gmail.com')
     to = Email.new(email: 'benjamin.charmes@gmail.com')
     subject = @contact.subject
