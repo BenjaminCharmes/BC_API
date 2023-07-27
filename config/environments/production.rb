@@ -65,7 +65,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_options = {
-  from: 'benjamin-charmes-portfolio@noreply.com'
+  from: 'benjamin.charmes@gmail.com'
 }
 
   # Ignore bad email addresses and do not raise email delivery errors.
