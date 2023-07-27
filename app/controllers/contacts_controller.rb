@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
     @contact = Contact.new(contact_params)
@@ -10,9 +10,7 @@ class ContactsController < ApplicationController
       render json: { error: "Erreur lors de l'envoi de l'e-mail. " + @contact.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
-
   private
-
   def contact_params
     params.require(:contact).permit(:email, :subject, :message)
   end
