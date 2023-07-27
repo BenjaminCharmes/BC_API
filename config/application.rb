@@ -18,5 +18,13 @@ module BenjaminCharmesApi
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'https://benjamincharmes.github.io'
+        resource '/send-email', headers: :any, methods: [:post]
+      end
+    end
+
   end
 end
