@@ -9,7 +9,7 @@ ActionMailer::Base.smtp_settings = {
   :password => ENV['MAILJET_PWD'],
   :domain => 'benjamincharmes.github.io',
   :address => 'in-v3.mailjet.com',
-  :port => 25,
+  :port => 2525,
   :authentication => :plain,
   :enable_starttls_auto => true
 }
