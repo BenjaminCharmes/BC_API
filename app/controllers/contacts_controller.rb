@@ -1,19 +1,26 @@
-class ContactsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
+# app/mailers/contact_mailer.rb
 
-  def create
-    @contact = Contact.new(contact_params)
-    if @contact.save
-      ContactMailer.send_email(@contact).deliver_now
-      render json: { message: 'E-mail envoyé avec succès !' }
+class ContactMailer < ApplicationMailer
+  def send_email(contact)
+    @contact = contact
+
+    require 'sendgrid-ruby'
+    include SendGrid
+
+    from = Email.new(email: 'benjamin.charmes+portfolio@gmail.com')
+    to = Email.new(email: 'benjamin.charmes@gmail.com')
+    subject = @contact.subject
+    content = Content.new(type: 'text/plain', value: @contact.message)
+    mail = Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+
+    if response.status_code == 202
+      # L'e-mail a été envoyé avec succès
+      # Vous pouvez ajouter ici des actions supplémentaires ou un message de réussite si nécessaire
     else
-      render json: { error: "Erreur lors de l'envoi de l'e-mail. " + @contact.errors.full_messages.join(", ") }, status: :unprocessable_entity
+      # Gérer les erreurs d'envoi d'e-mail si nécessaire
     end
-  end
-
-  private
-
-  def contact_params
-    params.require(:contact).permit(:email, :subject, :message)
   end
 end
