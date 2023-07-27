@@ -22,7 +22,7 @@ module BenjaminCharmesApi
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'https://benjamincharmes.github.io'
-        resource '/send-email', headers: :any, methods: [:post]
+        resource '*', headers: :any, methods: [:get, :post, :options, :put, :delete]
       end
     end
 
